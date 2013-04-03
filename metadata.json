@@ -1,0 +1,30 @@
+{
+  "dependencies": [
+
+  ],
+  "summary": "UNKNOWN",
+  "source": "UNKNOWN",
+  "types": [
+
+  ],
+  "description": "UNKNOWN",
+  "author": "iweb",
+  "checksums": {
+    "files/global.yaml": "23cd138d06e32757ff9a8d43808881c7",
+    "files/hiera.yaml": "72d16e9284514104268baab2803f99b6",
+    "manifests/master/hiera.pp": "ab68712ce6a8db0aa21a78829110adf8",
+    "manifests/agent.pp": "d54d9fb0105cd25c74825ab6f83b6ef1",
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "manifests/master/autosign.pp": "9f2f2c442dc34817c41cb287c749161b",
+    "README": "43f125e3a21a79bf5a2b8d6279fa1181",
+    "tests/init.pp": "2dade839eb0e051c059dbf0993453510",
+    "Modulefile": "850d2b3f66135a5229ec662ce9985a74",
+    "files/autosign.conf": "3389dae361af79b04c9c8e7057f60cc6",
+    "manifests/init.pp": "3c06e2038473da6e4a35f38384b3ed81",
+    "manifests/master.pp": "71c12fd58cae501c4548aaa2e57cc1de"
+  },
+  "license": "Apache License, Version 2.0",
+  "project_page": "UNKNOWN",
+  "version": "0.0.1",
+  "name": "iweb-puppet"
+}
