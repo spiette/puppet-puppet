@@ -1,10 +1,12 @@
+# == Class: puppet::master
 class puppet::master(
   $service_name='puppetmaster',
-  $autosign=false,  
+  $autosign=false,
 ){
   package {'puppetmaster-passenger':
     ensure => present
   }
+  include puppet::master::service
 
   # /etc/puppet/puppet.conf
   # Class - require Package - Notify Service
@@ -27,15 +29,14 @@ class puppet::master(
   # Autosign since we don't want to manage certificate at this point
   if $autosign {
     file { '/etc/puppet/autosign.conf':
-      owner => puppet,
-      group => puppet,
-      mode => 600,
+      owner   => puppet,
+      group   => puppet,
+      mode    => '0600',
       content => '*',
       require => Package['puppetmaster-passenger'],
-      notify => Service[$puppet::master::service_name],
+      notify  => Service[$puppet::master::service_name],
     }
   }
 
   include puppet::master::hiera
-
 }
