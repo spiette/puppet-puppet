@@ -36,21 +36,28 @@
 # Copyright 2013 Your name here, unless otherwise noted.
 #
 class puppet (
+  $certname=$::fqdn,
+  $server=$certname,
   $master=false,
-  $service_name='puppetmaster',
-  $autosign=false,  
+  $autosign=false,
+  $passenger=false,
+  $puppetdb=false,
 ) {
-  if $master {
-    class { 'puppet::master':
-      service_name => $service_name,
-      autosign     => $autosign,
-    }
-  }
   include concat::setup
 
-  /*
-  concat {'/etc/puppet/puppet.conf':
-    notify => Service[$puppet::master::service_name]
+  concat { '/etc/puppet/puppet.conf': }
+
+  class { 'puppet::agent':
+    server   => $server,
+    certname => $certname
   }
-  */
+
+  if $master {
+    class { 'puppet::master':
+      autosign  => $autosign,
+      passenger => $passenger,
+      certname  => $certname,
+      puppetdb  => $puppetdb,
+    }
+  }
 }
