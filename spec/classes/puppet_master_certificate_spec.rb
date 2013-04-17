@@ -16,7 +16,7 @@ describe 'puppet::master::certificate' do
       } }
 
       it { should create_class('puppet::master::certificate') }
-      #it { should create_class('puppet') }
+      it { should create_package('puppet') }
       it { should create_exec('puppet-cert-generate')\
         .with(
           'command' => /generate.*#{fqdn}/,
