@@ -46,6 +46,10 @@ class puppet::master(
   } ~>
   Service[$service_name]
 
+  # We want to make sure that the puppetdb service doesn't start
+  # before the puppetmaster.
+  Package[$puppetmaster] -> Package <| tag == 'puppetdb' |>
+
 
   file { '/var/lib/puppet/reports':
     ensure => directory,
