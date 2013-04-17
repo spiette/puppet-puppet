@@ -50,9 +50,9 @@ class puppet (
   $certname=$::fqdn,
   $server='puppet',
   $master=false,
-  $autosign=false,
   $passenger=false,
   $puppetdb=false,
+  $autosign=false,
 ) {
   include concat::setup
 
