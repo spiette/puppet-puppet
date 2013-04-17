@@ -5,8 +5,8 @@ service = package
 fqdn = 'agent.domain.local'
 server = 'puppet.domain.local'
 
-describe 'puppet::agent' do
-  let(:title) { 'puppet::agent' }
+describe 'puppet' do
+  let(:title) { 'puppet' }
 
   ['Debian', 'RedHat'].each do |osfamily|
     context "class with some parameters on #{osfamily}" do 
@@ -19,6 +19,8 @@ describe 'puppet::agent' do
         :fqdn => fqdn
       } }
 
+      it { should create_class('puppet') }
+      it { should create_class('puppet::config') }
       it { should create_class('concat::setup') }
       it { should create_class('puppet::agent') }
       it { should create_class('puppet::agent::config') }
