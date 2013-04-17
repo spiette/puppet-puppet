@@ -1,43 +1,54 @@
 # == Class: puppet
 #
-# Full description of class puppet here.
+# This class will configure the puppet agent and optionnaly the puppet
+# server. The puppet server will managed through puppet.
 #
 # === Parameters
 #
-# Document parameters here.
+# Most of the parameters have the same name than the puppet option. Look at the
+# puppet documentation for more details.
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*certname*]
+#   Will be used by both agent and server. Defaults to `$::fqdn`. You can
+#   also set alt_dns_names for the server name if you want other names.
 #
-# === Variables
+# ==== Agent parameters
 #
-# Here you should define a list of variables that this module would require.
+# [*server*]
+#   Which server will be used by the agent. Defaults to 'puppet'
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# ==== Master parameters
+#
+# [*master*]
+#   Whether the puppetmaster will be installed or not.
+# [*passenger*]
+#   Whether the puppetmaster will be running using passenger and apache or
+#   webrick.
+# [*autosign*]
+#   Whether the puppet master will sign automatically the agents CSR. Mostly
+#   for testing, don't use that feature in production.
+# [*puppetdb*]
+#   Whether the puppet master will use puppetdb for storeconfigs. You need to
+#   setup puppetdb separately using the puppetdb module from PuppetLabs.
 #
 # === Examples
 #
-#  class { puppet:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
+#  class { 'puppet':
+#    certname => 'somehost.somedomain.tld',
+#    server   => 'puppetmaster.somedomain.tld',
 #  }
 #
-# === Authors
+# === Author
 #
-# Author Name <author@domain.com>
+# Simon Piette <simon.piette@savoirfairelinux.com>
 #
 # === Copyright
 #
-# Copyright 2013 Your name here, unless otherwise noted.
+# Copyright 2013 Simon Piette <simon.piette@savoirfairelinux.com>
 #
 class puppet (
   $certname=$::fqdn,
-  $server=$certname,
+  $server='puppet',
   $master=false,
   $autosign=false,
   $passenger=false,
