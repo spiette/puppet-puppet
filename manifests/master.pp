@@ -31,11 +31,13 @@ class puppet::master(
 
   # Client configuration should be done before the puppetmaster is
   # launched a first time, so certificates are correctly generated.
+  anchor { 'puppet::master::begin': } ->
   Concat['/etc/puppet/puppet.conf']->
   File['/var/lib/puppet/reports']->
   Package[$puppetmaster]->
   Class['puppet::master::hiera']~>
-  Service[$service_name]
+  Service[$service_name] ->
+  anchor { 'puppet::master::end': }
 
   concat::fragment { 'puppet_master_conf':
     target  => '/etc/puppet/puppet.conf',
