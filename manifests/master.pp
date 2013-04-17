@@ -6,6 +6,8 @@ class puppet::master(
   $puppetdb=false,
   $options= {},
 ){
+  include puppet::params
+
   if $passenger {
     $puppetmaster = 'puppetmaster-passenger'
     package { 'puppetmaster':
@@ -17,8 +19,9 @@ class puppet::master(
       ensure => absent,
     }
   }
+
   $service_name = $passenger ? {
-    true    => 'apache2',
+    true    => $puppet::params::passenger_service,
     false   => 'puppetmaster',
     default => fail('$passenger is true or false'),
   }
