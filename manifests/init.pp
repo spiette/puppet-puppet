@@ -47,6 +47,7 @@ class puppet (
 
   concat { '/etc/puppet/puppet.conf': }
 
+  anchor { 'puppet::begin': } ->
   class { 'puppet::agent':
     server   => $server,
     certname => $certname
@@ -58,6 +59,8 @@ class puppet (
       passenger => $passenger,
       certname  => $certname,
       puppetdb  => $puppetdb,
-    }
+    } -> anchor { 'puppet::end': }
+  } else {
+    Class['puppet::agent'] -> anchor { 'puppet::end': }
   }
 }
