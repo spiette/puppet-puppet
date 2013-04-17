@@ -8,10 +8,11 @@ class puppet::agent (
   anchor { 'puppet::agent::begin': }->
   Package['puppet']->
   Class['puppet::agent::config']~>
-  Service['puppet'] ->
+  Service['puppet']->
   anchor { 'puppet::agent::end': }
 
   include concat::setup
+  include puppet::config
   include puppet::agent::config
 
   package { 'puppet':

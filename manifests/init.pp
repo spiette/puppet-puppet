@@ -54,10 +54,8 @@ class puppet (
   $puppetdb=false,
   $autosign=false,
 ) {
-  include concat::setup
 
-  concat { '/etc/puppet/puppet.conf': }
-
+  include puppet::config
   anchor { 'puppet::begin': } ->
   class { 'puppet::agent':
     server   => $server,

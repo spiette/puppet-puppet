@@ -10,7 +10,7 @@ class puppet::agent::config {
 
   concat::fragment { 'puppet_certname':
     target  => '/etc/puppet/puppet.conf',
-    content => "certname = ${puppet::certname}\n",
+    content => "certname = ${puppet::agent::certname}\n",
     order   => '20',
   } ~>
   Service <| tag == 'puppetconf' |>
