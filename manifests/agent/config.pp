@@ -22,8 +22,10 @@ class puppet::agent::config {
   } ~>
   Service <| tag == 'puppet' |>
 
-  file { '/etc/default/puppet':
-    ensure  => present,
-    content => template('puppet/default.erb')
+  if $::osfamily == 'Debian' {
+    file { '/etc/default/puppet':
+      ensure  => present,
+      content => template('puppet/default.erb')
+    }
   }
 }
