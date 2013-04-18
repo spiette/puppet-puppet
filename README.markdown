@@ -1,5 +1,7 @@
 puppet
 
+[![Build Status](https://travis-ci.org/mcourtois/puppet-puppet.png)](https://travis-ci.org/mcourtois/puppet-puppet)
+
 This is the puppet module.
 
 License
