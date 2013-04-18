@@ -19,10 +19,9 @@ describe 'puppet::master::hiera' do
       :group => 'puppet',
       :mode  => '0600'
     } 
+    it { should create_class('puppet::master::hiera') }
     it { should create_file('/etc/puppet/hieradata')\
-      .with(permissions.merge( {
-        :ensure => :directory
-        } ) ) }
+      .with(permissions.merge({ :ensure => :directory }) ) }
     it { should create_file('/etc/puppet/hiera.yaml')\
       .with(permissions.merge( {
         :ensure => :present,
