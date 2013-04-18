@@ -3,3 +3,6 @@
 server      = <%= @server %>
 #Set the environment for THIS machine
 environment = <%= @environment %>
+<% if defined?(@ca_server) -%>
+ca_server = <%= @ca_server %>
+<% end-%>

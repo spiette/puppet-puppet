@@ -50,6 +50,8 @@ class puppet (
   $certname=$::fqdn,
   $server='puppet',
   $master=false,
+  $ca=true,
+  $ca_server=undef,
   $passenger=false,
   $puppetdb=false,
   $autosign=false,
@@ -58,12 +60,14 @@ class puppet (
   include puppet::config
   anchor { 'puppet::begin': } ->
   class { 'puppet::agent':
-    server   => $server,
-    certname => $certname
+    server    => $server,
+    certname  => $certname,
+    ca_server => $ca_server,
   }
 
   if $master {
     class { 'puppet::master':
+      ca        => $ca,
       autosign  => $autosign,
       passenger => $passenger,
       certname  => $certname,

@@ -1,6 +1,7 @@
 # == Class: puppet::agent
 class puppet::agent (
   $server = 'puppet',
+  $ca_server = undef,
   $runinterval = '1800',
   $environment = 'production',
   $certname = $::fqdn,

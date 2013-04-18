@@ -4,6 +4,7 @@ class puppet::master(
   $passenger=false,
   $certname=$::fqdn,
   $puppetdb=false,
+  $ca=true,
   $options= {},
 ){
   include puppet::params
@@ -18,6 +19,13 @@ class puppet::master(
     package { 'puppetmaster-passenger':
       ensure => absent,
     }
+  }
+
+  if $ca == false {
+    Class['puppet::master::certificate']->
+    Package[$puppetmaster]
+
+    include puppet::master::certificate
   }
 
   $service_name = $passenger ? {
