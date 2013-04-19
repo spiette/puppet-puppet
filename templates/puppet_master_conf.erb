@@ -12,6 +12,10 @@ dns_alt_names = <%= dns_alt_names %>
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 
+<% if @options.has_key?('environment') %>
+<% environment = @options['environment'] %>
+environment = <%= environment %>
+<% end -%>
 <% if @options.has_key?('modulepath') %>
 <% modulepath = @options['modulepath'].join(':') %>
 modulepath = <%= modulepath %>

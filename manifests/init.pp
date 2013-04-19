@@ -50,6 +50,7 @@ class puppet (
   $certname=$::fqdn,
   $server='puppet',
   $master=false,
+  $master_options={},
   $ca=true,
   $ca_server=undef,
   $passenger=false,
@@ -72,6 +73,7 @@ class puppet (
       passenger => $passenger,
       certname  => $certname,
       puppetdb  => $puppetdb,
+      options   => $master_options,
     } -> anchor { 'puppet::end': }
   } else {
     Class['puppet::agent'] -> anchor { 'puppet::end': }
