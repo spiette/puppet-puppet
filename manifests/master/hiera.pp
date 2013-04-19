@@ -16,9 +16,10 @@ class puppet::master::hiera {
   }
 
   file { '/etc/puppet/hieradata/global.yaml':
-    owner   => 'puppet',
-    group   => 'puppet',
-    mode    => '0600',
-    source  => "puppet:///modules/${module_name}/global.yaml",
+    ensure => present,
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0600',
+    source => "puppet:///modules/${module_name}/global.yaml",
   }
 }

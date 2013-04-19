@@ -17,12 +17,14 @@ describe 'puppet::master::certificate' do
 
       it { should create_class('puppet::master::certificate') }
       it { should create_package('puppet') }
-      it { should create_exec('puppet-cert-generate')\
+      it { should create_exec('puppet-cert-request')\
         .with(
-          'command' => /generate.*#{fqdn}/,
-          'creates' => /#{fqdn}.pem/,
+          'command' => /agent.*#{fqdn}/,
+          'creates' => /.*#{fqdn}.pem/,
           'timeout' => '180'
         ) }
+      it { should create_exec('create-ca-directory') }
+      it { should create_exec('link-ca-crl') }
     end
   end
 end

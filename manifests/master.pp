@@ -8,6 +8,7 @@ class puppet::master(
   $options= {},
 ){
   include puppet::params
+  include puppet::config
 
   if $passenger {
     $puppetmaster = 'puppetmaster-passenger'
