@@ -1,18 +1,15 @@
-puppet
+# puppet
 
-[![Build Status](https://travis-ci.org/mcourtois/puppet-puppet.png)](https://travis-ci.org/mcourtois/puppet-puppet)
+[![Build Status](https://travis-ci.org/spiette/puppet-puppet.png)](https://travis-ci.org/spiette/puppet-puppet)
 
 This is the puppet module. It is under construction and lack many basic features. Come back soon.
 
-License
--------
+# License
 Apache Licence 2.0
 
-Contact
--------
+# Contact
 Simon Piette <piette.simon@gmail.com>
 
-Support
--------
+# Support
 
 Please log tickets and issues at our [Projects site](https://github.com/spiette/puppet-puppet)
