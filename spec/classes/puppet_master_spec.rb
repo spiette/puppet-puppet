@@ -4,6 +4,7 @@ fqdn = 'master.domain.local'
 autosign = 'true'
 puppetmaster_package = 'puppetmaster'
 puppetmaster_service = 'puppetmaster'
+ca = 'false'
 
 describe 'puppet::master' do
   let(:title) { 'puppet::master' }
@@ -13,6 +14,7 @@ describe 'puppet::master' do
     let(:params) { {
       :certname => fqdn,
       :autosign => autosign,
+      :ca => ca,
       :options => {
         'environment' => 'staging',
         'modulepath' => "#{confdir}/production:#{confdir}/staging",
@@ -37,6 +39,9 @@ describe 'puppet::master' do
       .with_content(/^environment = staging/)\
       .with_content(/^modulepath = #{confdir}\/production\:#{confdir}\/staging/)\
       .with_content(/^manifest = .etc.puppet.staging.site.pp$/) }
+    if ca == false
+      it { should create_class('puppet::master::certificate') }
+    end
     if autosign == true
       it { should create_class('puppet::master::autosign') }
     end
