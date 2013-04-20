@@ -4,6 +4,7 @@ class puppet::master(
   $passenger=false,
   $certname=$::fqdn,
   $puppetdb=false,
+  $hieraconfig=undef,
   $ca=true,
   $options= {},
 ){
@@ -62,6 +63,14 @@ class puppet::master(
   # before the puppetmaster.
   Package[$puppetmaster] -> Package <| tag == 'puppetdb' |>
 
+  # Autosign since we don't want to manage certificate at this point
+  if $autosign {
+    include puppet::master::autosign
+  }
+
+  class { 'puppet::master::hiera':
+    hieraconfig => $hieraconfig,
+  }
 
   file { '/var/lib/puppet/reports':
     ensure => directory,
@@ -70,9 +79,4 @@ class puppet::master(
     mode   => '0640',
   }
 
-  # Autosign since we don't want to manage certificate at this point
-  if $autosign {
-    include puppet::master::autosign
-  }
-  include puppet::master::hiera
 }
