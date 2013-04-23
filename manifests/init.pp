@@ -55,7 +55,7 @@ class puppet (
   $ca_server=undef,
   $passenger=false,
   $puppetdb=false,
-  $autosign=false,
+  $autosign=[],
 ) {
 
   include puppet::config
