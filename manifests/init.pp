@@ -45,6 +45,7 @@
 # === Copyright
 #
 # Copyright 2013 Simon Piette <simon.piette@savoirfairelinux.com>
+# Apache 2.0 Licence
 #
 class puppet (
   $certname=$::fqdn,
