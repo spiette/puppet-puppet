@@ -11,6 +11,8 @@ This is a puppet module. It is meant to be used on nodes as well as puppetmaster
 * Works well with puppetlabs/puppetdb modules
 * agent_options and master_options hash to set arbitrary options to agent and master
 
+The puppetmaster with passenger uses puppetlabs package, which means that it is not as robust as a pure puppet-based recipe.
+
 # Synopsis
 
 Except for configuration parameters, only the top puppet class should invoked. Use the `master` parameter to enable the puppetmaster.
@@ -96,7 +98,9 @@ Except for configuration parameters, only the top puppet class should invoked. U
       passenger => true,
     }
 
-###
+### How to use with puppetdb
+
+See in tests/puppetmaster-puppetdb.pp. This role should bootstrap a puppetmaster with puppetdb.
 
 # Requirements
 
