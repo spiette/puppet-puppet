@@ -50,7 +50,8 @@ class puppet (
   $certname=$::fqdn,
   $server='puppet',
   $master=false,
-  $master_options={},
+  $agent_options=undef,
+  $master_options=undef,
   $ca=true,
   $ca_server=undef,
   $passenger=false,
@@ -64,6 +65,7 @@ class puppet (
     server    => $server,
     certname  => $certname,
     ca_server => $ca_server,
+    options   => $agent_options,
   }
 
   if $master {

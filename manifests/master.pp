@@ -6,7 +6,7 @@ class puppet::master(
   $puppetdb=false,
   $hieraconfig=undef,
   $ca=true,
-  $options= {},
+  $options=undef,
 ){
   include puppet::params
   include puppet::config
