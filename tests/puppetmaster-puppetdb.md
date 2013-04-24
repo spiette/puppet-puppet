@@ -1,7 +1,7 @@
 # == Class role::puppetmaster
 # Example puppemaster role
 #
-# Needed modules (Puppetfile format)
+# Needed modules (Puppetfile format) apart this puppet module.
 #
 # forge "http://forge.puppetlabs.com"
 # mod 'puppetlabs/stdlib'
@@ -17,8 +17,8 @@
 # certname Run puppet twice to correct this. One run will suffice for cases
 # when fqdn == certname
 #
-# You can place this file in ${modulepath}/role/manifests/ (or rename the class
-# to your liking) and include it in your node declaration.
+# You can renamed this file to ${modulepath}/role/manifests/puppetmaster.pp (or
+# rename the class to your liking) and include it in your node declaration.
 class role::puppetmaster(
   $ip = $::ipaddress_eth0,
   $master_certname = 'puppet.local.lan',
