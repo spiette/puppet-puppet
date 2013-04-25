@@ -34,11 +34,11 @@ class puppet::master(
 
   if $passenger {
     $puppetmaster = 'puppetmaster-passenger'
-    package { 'puppetmaster':
+    package { $puppet::params::puppetmaster_pkg:
       ensure => absent,
     }
   } else {
-    $puppetmaster = 'puppetmaster'
+    $puppetmaster = $puppet::params::puppetmaster_pkg
     package { 'puppetmaster-passenger':
       ensure => absent,
     }
