@@ -5,6 +5,6 @@ environment = <%= @environment %>
 <% if defined?(@ca_server) -%>
 ca_server = <%= @ca_server %>
 <% end-%>
-<% if @options.is_a?(Hash) then @options.each do | option, value | -%>
-<%= option %> = <%= value %>
+<% if @options.is_a?(Hash) then @options.keys.sort.each do | option | -%>
+<%= option %> = <%= @options[option] %>
 <% end %><% end -%>
