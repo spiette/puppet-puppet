@@ -50,6 +50,7 @@
 class puppet (
   $certname=$::fqdn,
   $server='puppet',
+  $environment='production',
   $master=false,
   $agent_options=undef,
   $master_options=undef,
@@ -63,10 +64,11 @@ class puppet (
   include puppet::config
   anchor { 'puppet::begin': } ->
   class { 'puppet::agent':
-    server    => $server,
-    certname  => $certname,
-    ca_server => $ca_server,
-    options   => $agent_options,
+    server      => $server,
+    certname    => $certname,
+    ca_server   => $ca_server,
+    options     => $agent_options,
+    environment => $environment,
   }
 
   if $master {

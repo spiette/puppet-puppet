@@ -4,6 +4,7 @@ package = 'puppet'
 service = package
 fqdn = 'agent.domain.local'
 server = 'puppet.domain.local'
+agent_options = { 'splay' => 'true' }
 
 describe 'puppet' do
   let(:title) { 'puppet' }
@@ -14,7 +15,8 @@ describe 'puppet' do
         :certname => fqdn,
         :server   => server,
         :master => 'true',
-        :agent_options => { 'splay' => 'true' },
+        :environment => 'staging',
+        :agent_options => agent_options,
         :master_options => { 'environment' => 'stage' }
       } }
       let(:facts) { {
@@ -25,7 +27,12 @@ describe 'puppet' do
       it { should create_class('puppet') }
       it { should create_class('puppet::config') }
       it { should create_class('concat::setup') }
-      it { should create_class('puppet::agent') }
+      it { should create_class('puppet::agent')\
+        .with(
+        'environment' => 'staging',
+        'server' => server,
+        'certname' => fqdn
+      ) }
       it { should create_class('puppet::agent::config') }
       it { should create_class('puppet::master') }
       it { should create_concat('/etc/puppet/puppet.conf') }
