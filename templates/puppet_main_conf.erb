@@ -7,4 +7,6 @@ rundir      = /var/run/puppet
 factpath    = $vardir/lib/facter
 pluginsync  = true
 templatedir = $confdir/templates
+#Set the environment for THIS machine
+environment = <%= @environment %>
 
