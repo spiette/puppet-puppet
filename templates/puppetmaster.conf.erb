@@ -1,7 +1,7 @@
 Listen 8140
 
 <VirtualHost *:8140>
-  CustomLog       /var/log/httpd/puppetmaster_access.log combined_with_deflate_ratio
+  CustomLog       /var/log/httpd/puppetmaster_access.log combined
   ErrorLog        /var/log/httpd/puppetmaster_error.log
   LogLevel        warn
 
@@ -28,6 +28,7 @@ Listen 8140
   PassengerStatThrottleRate 120
   PassengerMaxPoolSize 4
   PassengerUseGlobalQueue on
+  PassengerLogLevel 1 # 0 = quiet, 1 = info 2 = debug, 3 = verbose debug
   RackAutoDetect Off
   RailsAutoDetect Off
   RackBaseURI /
