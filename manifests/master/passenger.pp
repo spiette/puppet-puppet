@@ -44,8 +44,15 @@ class puppet::master::passenger {
         owner   => 'puppet',
         group   => 'puppet',
         mode    => '0664',
-        source  => '/usr/share/puppet/ext/rack/files/config.ru',
+        source  => 'puppet:///modules/puppet/config.ru',
         notify  => Service[$puppet::params::passenger_service],
+      }
+      file { '/etc/puppet/fileserver.conf':
+        ensure => file,
+        owner  => 'puppet',
+        group  => 'puppet',
+        mode   => '0664',
+        source => 'puppet:///modules/puppet/fileserver.conf',
       }
     }
     default: {
