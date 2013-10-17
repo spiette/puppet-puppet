@@ -33,14 +33,17 @@ class puppet::master(
   include puppet::config
 
   if $passenger {
-    $puppetmaster = 'puppetmaster-passenger'
-    package { $puppet::params::puppetmaster_pkg:
+    $puppetmaster = $puppet::params::passenger_package
+    package { $puppet::params::puppetmaster_package:
       ensure => absent,
     }
+    include puppet::master::passenger
   } else {
-    $puppetmaster = $puppet::params::puppetmaster_pkg
-    package { 'puppetmaster-passenger':
-      ensure => absent,
+    $puppetmaster = $puppet::params::puppetmaster_package
+    if ($::osfamily == 'Debian' ) {
+      package { 'puppetmaster-passenger':
+        ensure => absent,
+      }
     }
   }
 

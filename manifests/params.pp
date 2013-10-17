@@ -3,11 +3,13 @@ class puppet::params {
   case $::osfamily {
     'Debian': {
       $passenger_service = 'apache2'
-      $puppetmaster_pkg = 'puppetmaster'
+      $passenger_package = 'puppetmaster-passenger'
+      $puppetmaster_package = 'puppetmaster'
     }
     'RedHat': {
       $passenger_service = 'httpd'
-      $puppetmaster_pkg = 'puppet-server'
+      $passenger_package = 'mod_passenger'
+      $puppetmaster_package = 'puppet-server'
     }
     default: {
       fail('Unsupported OS')
