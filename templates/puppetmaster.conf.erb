@@ -20,7 +20,7 @@ Listen 8140
 
   SSLVerifyClient optional
   SSLVerifyDepth  1
-  SSLOptions +StdEnvVars
+  SSLOptions +StdEnvVars +ExportCertData
 
   # Passenger options that can be set in a virtual host
   # configuration block.
@@ -29,7 +29,7 @@ Listen 8140
   PassengerMaxPoolSize 4
   PassengerUseGlobalQueue on
   # 0 = quiet, 1 = info 2 = debug, 3 = verbose debug
-  PassengerLogLevel 1
+  PassengerLogLevel 0
   RackAutoDetect Off
   RailsAutoDetect Off
   RackBaseURI /
