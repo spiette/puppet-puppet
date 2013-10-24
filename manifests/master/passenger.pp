@@ -54,6 +54,12 @@ class puppet::master::passenger {
         mode   => '0664',
         source => 'puppet:///modules/puppet/fileserver.conf',
       }
+      if (defined($::selinux) and $::selinux ) {
+        selboolean { 'httpd_can_network_connect':
+          persistent => true,
+          value      => 'on',
+        }
+      }
     }
     default: {
       fail("Unsupported OS family: ${::osfamily}")
