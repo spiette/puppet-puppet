@@ -16,7 +16,8 @@ describe 'puppet::master::autosign' do
 
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
 
     it { should create_class('puppet::master::autosign') }
@@ -36,7 +37,8 @@ describe 'puppet::master::autosign' do
 
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
 
     it { expect { should create_class('puppet::master::autosign') }.to\

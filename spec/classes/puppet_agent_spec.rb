@@ -16,7 +16,8 @@ describe 'puppet::agent' do
       } }
       let(:facts) { {
         :osfamily => osfamily,
-        :fqdn => fqdn
+        :fqdn => fqdn,
+        :concat_basedir => '/var/lib/puppet/concat'
       } }
 
       it { should create_class('concat::setup') }
@@ -53,7 +54,8 @@ describe 'puppet::agent' do
     } }
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
 
     it { should create_class('puppet::agent') }

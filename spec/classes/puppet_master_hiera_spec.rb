@@ -16,7 +16,8 @@ describe 'puppet::master::hiera' do
   context "class" do
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
 
     it { should create_class('puppet::master::hiera') }
@@ -38,7 +39,8 @@ describe 'puppet::master::hiera' do
     } }
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
     it { should create_class('puppet::master::hiera') }
     it { should create_file('/etc/puppet/hieradata')\

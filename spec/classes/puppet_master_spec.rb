@@ -28,7 +28,8 @@ describe 'puppet::master' do
 
       let(:facts) { {
         :osfamily => osfamily,
-        :fqdn => fqdn
+        :fqdn => fqdn,
+        :concat_basedir => '/var/lib/puppet/concat'
       } }
 
       it { should create_class('concat::setup') }

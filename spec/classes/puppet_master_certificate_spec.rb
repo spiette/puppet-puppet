@@ -11,7 +11,8 @@ describe 'puppet::master::certificate' do
   context "class with some parameters" do 
     let(:facts) { {
       :osfamily => 'Debian',
-      :fqdn => fqdn
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
     } }
 
     it { should create_class('puppet::master::certificate') }

@@ -21,7 +21,8 @@ describe 'puppet' do
       } }
       let(:facts) { {
         :osfamily => osfamily,
-        :fqdn => fqdn
+        :fqdn => fqdn,
+        :concat_basedir => '/var/lib/puppet/concat'
       } }
 
       it { should create_class('puppet') }
