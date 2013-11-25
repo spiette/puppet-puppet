@@ -17,7 +17,7 @@ describe 'puppet' do
         :master => 'true',
         :environment => 'staging',
         :agent_options => agent_options,
-        :mount_points => [ { 'name' => 'file', 'path' => '/etc/puppet/files', 'allow' => '*' } ],
+        :mount_points => [ { 'name' => 'files', 'path' => '/etc/puppet/files', 'allow' => '*' } ],
         :master_options => { 'environment' => 'stage' }
       } }
       let(:facts) { {
@@ -54,6 +54,12 @@ describe 'puppet' do
             'enable' => 'true',
             'tag'    => 'puppetconf'
            ) }
+      it { should create_class('puppet::master::fileserver') }
+      it { should create_file('/etc/puppet/fileserver.conf')\
+           .with_content(/^\[files\]/)\
+           .with_content(/^  path .etc.puppet.files/)\
+           .with_content(/^  allow \*/)
+      }
       if osfamily == 'Debian'
         it { should create_file('/etc/default/puppet')\
           .with_content(/^START=yes$/) }
