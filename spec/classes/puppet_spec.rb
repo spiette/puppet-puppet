@@ -17,6 +17,7 @@ describe 'puppet' do
         :master => 'true',
         :environment => 'staging',
         :agent_options => agent_options,
+        :mount_points => [ { 'name' => 'file', 'path' => '/etc/puppet/files', 'allow' => '*' } ],
         :master_options => { 'environment' => 'stage' }
       } }
       let(:facts) { {

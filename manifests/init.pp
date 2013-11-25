@@ -30,6 +30,9 @@
 # [*puppetdb*]
 #   Whether the puppet master will use puppetdb for storeconfigs. You need to
 #   setup puppetdb separately using the puppetdb module from PuppetLabs.
+# [*mount_points*]
+#   Array of hashes to create fileserver mount points. Defaults to undef.
+#   Keys are name, path and allow
 #
 # === Examples
 #
@@ -59,6 +62,7 @@ class puppet (
   $passenger=false,
   $puppetdb=false,
   $autosign=[],
+  $mount_points=undef,
 ) {
 
   include puppet::config
@@ -73,12 +77,13 @@ class puppet (
 
   if $master {
     class { 'puppet::master':
-      ca        => $ca,
-      autosign  => $autosign,
-      passenger => $passenger,
-      certname  => $certname,
-      puppetdb  => $puppetdb,
-      options   => $master_options,
+      ca           => $ca,
+      autosign     => $autosign,
+      passenger    => $passenger,
+      certname     => $certname,
+      puppetdb     => $puppetdb,
+      mount_points => $mount_points,
+      options      => $master_options,
     } -> anchor { 'puppet::end': }
   } else {
     Class['puppet::agent'] -> anchor { 'puppet::end': }

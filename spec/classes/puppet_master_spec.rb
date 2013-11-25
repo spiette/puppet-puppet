@@ -19,6 +19,7 @@ describe 'puppet::master' do
         :certname => fqdn,
         :autosign => autosign,
         :ca => ca,
+        :mount_points => [ { 'name' => 'files', 'path' => '/etc/puppet/files', 'allow' => '*' } ],
         :options => {
           'environment' => 'staging',
           'modulepath' => "#{confdir}/production:#{confdir}/staging",
@@ -62,6 +63,12 @@ describe 'puppet::master' do
         .with(:ensure => :present) }
       it { should create_service(master_service)\
         .with(:ensure => :running, :enable => 'true') }
+      it { should create_class('puppet::master::fileserver') }
+      it { should create_file('/etc/puppet/fileserver.conf')\
+           .with_content(/^\[files\]/)\
+           .with_content(/^  path .etc.puppet.files/)\
+           .with_content(/^  allow \*/)
+      }
     end
   end
 end
