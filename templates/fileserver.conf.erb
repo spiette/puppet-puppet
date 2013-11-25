@@ -39,3 +39,10 @@
 #
 # If added to auth.conf BEFORE the "path /file" rule, the rule above
 # will add stricter restrictions to the extra_files mount point.
+
+<% if @mount_points.kind_of?(Array) %><% @mount_points.each do |mount_point| %>
+[<%= mount_point['name'] %>]
+  path <%= mount_point['path'] %>
+  allow <%= mount_point['allow'] %>
+<% end %>
+<% end %>

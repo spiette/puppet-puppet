@@ -28,6 +28,7 @@ class puppet::master(
   $hieraconfig=undef,
   $ca=true,
   $options=undef,
+  $mount_points=undef,
 ){
   include puppet::params
   include puppet::config
@@ -92,6 +93,9 @@ class puppet::master(
     autosign => $autosign,
   }
 
+  class { 'puppet::master::fileserver':
+    mount_points => $mount_points,
+  }
   class { 'puppet::master::hiera':
     hieraconfig => $hieraconfig,
   }
