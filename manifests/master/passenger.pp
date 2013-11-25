@@ -47,13 +47,6 @@ class puppet::master::passenger {
         source  => 'puppet:///modules/puppet/config.ru',
         notify  => Service[$puppet::params::passenger_service],
       }
-      file { '/etc/puppet/fileserver.conf':
-        ensure => file,
-        owner  => 'puppet',
-        group  => 'puppet',
-        mode   => '0664',
-        source => 'puppet:///modules/puppet/fileserver.conf',
-      }
       if (defined($::selinux) and $::selinux ) {
         selboolean { 'httpd_can_network_connect':
           persistent => true,
