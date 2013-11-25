@@ -33,7 +33,6 @@ class puppet::agent (
   Service['puppet']->
   anchor { 'puppet::agent::end': }
 
-  include concat::setup
   include puppet::config
   class { 'puppet::agent::config':
     options => $options,
