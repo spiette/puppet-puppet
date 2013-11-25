@@ -7,7 +7,7 @@ class puppet::master::autosign(
     ensure  => present,
     owner   => puppet,
     group   => puppet,
-    mode    => '0644',
+    mode    => '0600',
     content => template('puppet/autosign_conf.erb'),
   }
 }
