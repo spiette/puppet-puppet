@@ -29,6 +29,7 @@ class puppet::master(
   $ca=true,
   $options=undef,
   $mount_points=undef,
+  $directoryenvironments=true,
 ){
   include puppet::params
   include puppet::config
