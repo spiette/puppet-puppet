@@ -28,14 +28,14 @@ class puppet::master::hiera (
     ensure => directory,
     owner  => 'puppet',
     group  => 'puppet',
-    mode   => '0600',
+    mode   => '0661',
   }
 
   file { '/etc/puppet/hiera.yaml':
     ensure => present,
     owner  => 'puppet',
     group  => 'puppet',
-    mode   => '0600',
+    mode   => '0664',
     source => $hieraconfig,
   }
 
