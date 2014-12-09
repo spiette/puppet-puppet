@@ -10,6 +10,10 @@
 #
 # [*hieraconfig*]
 #   a source option to override the one provided with the module
+#   no directories will be created.
+#
+# [*datadir*]
+#   where to find the yaml files, defaults to /etc/puppet/hieradata
 #
 # === Author
 #
@@ -23,21 +27,35 @@
 class puppet::master::hiera (
   $ensure = present,
   $hieraconfig = "puppet:///modules/${module_name}/hiera.yaml",
+  $datadir = '/etc/puppet/hieradata',
 ) {
-  file { '/etc/puppet/hieradata':
-    ensure => directory,
-    owner  => 'puppet',
-    group  => 'puppet',
-    mode   => '0661',
+
+  if ( $hieraconfig != "puppet:///modules/puppet/hiera.yaml" ) {
+    file { '/etc/puppet/hiera.yaml':
+      ensure => present,
+      owner  => 'puppet',
+      group  => 'puppet',
+      mode   => '0664',
+      source => $hieraconfig,
+    }
+  } else  {
+    file { '/etc/puppet/hiera.yaml':
+      ensure  => present,
+      owner   => 'puppet',
+      group   => 'puppet',
+      mode    => '0664',
+      content => template('puppet/hiera.yaml.erb'),
+    }
+    if ( $datadir == '/etc/puppet/hieradata') {
+      file { '/etc/puppet/hieradata':
+        ensure => directory,
+        owner  => 'puppet',
+        group  => 'puppet',
+        mode   => '0661',
+      }
+    }
   }
 
-  file { '/etc/puppet/hiera.yaml':
-    ensure => present,
-    owner  => 'puppet',
-    group  => 'puppet',
-    mode   => '0664',
-    source => $hieraconfig,
-  }
 
   if $ensure in [ present, latest ] {
     package { 'hiera':
