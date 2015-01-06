@@ -28,9 +28,10 @@ class puppet::master::hiera (
   $ensure = present,
   $hieraconfig = "puppet:///modules/${module_name}/hiera.yaml",
   $datadir = '/etc/puppet/hieradata',
+  $merge_behaviour = 'native',
 ) {
 
-  if ( $hieraconfig != "puppet:///modules/puppet/hiera.yaml" ) {
+  if ( $hieraconfig != 'puppet:///modules/puppet/hiera.yaml' ) {
     file { '/etc/puppet/hiera.yaml':
       ensure => present,
       owner  => 'puppet',
