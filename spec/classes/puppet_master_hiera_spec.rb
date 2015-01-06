@@ -1,15 +1,6 @@
 require 'spec_helper'
 
-package = 'puppet'
-service = package
 fqdn = 'agent.domain.local'
-server = 'puppet.domain.local'
-    permissions = {
-      :owner => 'puppet',
-      :group => 'puppet',
-      :mode  => '0600'
-    }
-
 describe 'puppet::master::hiera' do
   let(:title) { 'puppet::master::hiera' }
 
@@ -19,7 +10,6 @@ describe 'puppet::master::hiera' do
       :fqdn => fqdn,
       :concat_basedir => '/var/lib/puppet/concat'
     } }
-
     it { should create_class('puppet::master::hiera') }
     it { should create_package('hiera')\
       .with( :ensure => :present) }
