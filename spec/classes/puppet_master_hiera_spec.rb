@@ -50,7 +50,27 @@ describe 'puppet::master::hiera' do
     } }
     it { should create_class('puppet::master::hiera') }
     it { should create_file('/etc/puppet/hiera.yaml')\
+      .with_content(/:datadir: .etc.puppet.hieratest/)\
+      .with_content(/:merge_behaviour: native/)
+       }
+    it { should create_package('hiera')\
+      .with( :ensure => :latest) }
+  end
+  context "class with merge_behaviour param" do
+    let(:params) { {
+      :ensure => 'latest',
+      :datadir => '/etc/puppet/hieratest',
+      :merge_behaviour => 'deeper',
+    } }
+    let(:facts) { {
+      :osfamily => 'Debian',
+      :fqdn => fqdn,
+      :concat_basedir => '/var/lib/puppet/concat'
+    } }
+    it { should create_class('puppet::master::hiera') }
+    it { should create_file('/etc/puppet/hiera.yaml')\
       .with_content(/:datadir: .etc.puppet.hieratest/)
+      .with_content(/:merge_behaviour: deeper/)
        }
     it { should create_package('hiera')\
       .with( :ensure => :latest) }
