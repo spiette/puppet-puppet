@@ -43,26 +43,29 @@ describe 'puppet::agent' do
       end
     end
   end
-  context "class with $options parameters on Debian" do 
-    let(:params) { {
-      :certname => fqdn,
-      :server   => server,
-      :options  => {
-        'runinterval' => '900',
-        'splay' => 'true'
-      }
-    } }
-    let(:facts) { {
-      :osfamily => 'Debian',
-      :fqdn => fqdn,
-      :concat_basedir => '/var/lib/puppet/concat'
-    } }
+  ['Debian', 'RedHat'].each do |osfamily|
+    context "class with $options parameters on #{osfamily}" do 
+      let(:params) { {
+        :certname => fqdn,
+        :server   => server,
+        :options  => {
+          'runinterval' => '900',
+          'splay' => 'true'
+        }
+      } }
+      let(:facts) { {
+        :osfamily => osfamily,
+        :fqdn => fqdn,
+        :concat_basedir => '/var/lib/puppet/concat'
+      } }
 
-    it { should create_class('puppet::agent') }
-    it { should create_class('puppet::agent::config') }
-    it { should create_concat('/etc/puppet/puppet.conf') }
-    it { should create_concat__fragment('puppet_agent_conf')\
-         .with_content(/runinterval = 900/)\
-         .with_content(/splay = true/) }
+      it { should create_class('puppet::agent') }
+      it { should create_class('puppet::agent::config') }
+      it { should create_concat('/etc/puppet/puppet.conf') }
+      it { should create_concat__fragment('puppet_agent_conf')\
+           .with_content(/runinterval = 900/)\
+           .with_content(/splay = true/) }
+    end
   end
+
 end
