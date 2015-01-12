@@ -8,8 +8,3 @@ factpath    = $vardir/lib/facter
 pluginsync  = true
 #Set the environment for THIS machine
 environment = <%= @environment %>
-<% if @master and @directoryenvironments then %>
-environmentpath = $confdir/environments
-basemodulepath = modules:manifests
-defaults_manifest = manifests
-<% end %>
