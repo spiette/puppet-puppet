@@ -45,6 +45,7 @@ describe 'puppet' do
            .with_content(/certname = #{fqdn}/) }
       it { should create_concat__fragment('puppet_agent_conf')\
            .with_content(/server      = #{server}/)\
+           .with_content(/environmentpath = \$confdir.environments/)\
            .with_content(/splay = true/) }
       it { should create_concat__fragment('puppet_master_conf')\
            .with_content(/environment = stage/) }
