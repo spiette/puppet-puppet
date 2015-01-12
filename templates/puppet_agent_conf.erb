@@ -6,3 +6,6 @@ ca_server = <%= @ca_server %>
 <% if @options.is_a?(Hash) then @options.keys.sort.each do | option | -%>
 <%= option %> = <%= @options[option] %>
 <% end %><% end -%>
+<% if @master and @directoryenvironments then %>
+environmentpath = $confdir/environments
+<% end %>
