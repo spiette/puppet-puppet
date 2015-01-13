@@ -18,7 +18,7 @@ describe 'puppet' do
         :environment => 'staging',
         :agent_options => agent_options,
         :mount_points => [ { 'name' => 'files', 'path' => '/etc/puppet/files', 'allow' => '*' } ],
-        :master_options => { 'environment' => 'stage' }
+        :master_options => { 'environment' => 'stage', 'environmentpath' => '/etc/puppet/environments' }
       } }
       let(:facts) { {
         :osfamily => osfamily,
@@ -45,10 +45,10 @@ describe 'puppet' do
            .with_content(/certname = #{fqdn}/) }
       it { should create_concat__fragment('puppet_agent_conf')\
            .with_content(/server      = #{server}/)\
-           .with_content(/environmentpath = \$confdir.environments/)\
            .with_content(/splay = true/) }
       it { should create_concat__fragment('puppet_master_conf')\
-           .with_content(/environment = stage/) }
+           .with_content(/environment = stage/)\
+           .with_content(/environmentpath = .etc.puppet.environments/) }
       it { should create_service(service)\
            .with(
             'ensure' => 'running',

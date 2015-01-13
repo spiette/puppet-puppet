@@ -80,8 +80,11 @@ Except for configuration parameters, only the top puppet class should invoked. U
         'splay' => true,
       }
       master_options => {
-        'manifest' => '/etc/puppet/environments/$environment/site.pp',
-        'modulepath' => '/etc/puppet/environments/$environment/modules:/etc/puppet/environments/$environment/site',
+        # set directory environments, set 'manifest' and 'modulepath' configuration directive
+        # in $confdir/environments/<environment>/environment.conf
+        # manifest = manifests
+        # modulepath = modules:manifests
+        environmentpath => '$confdir/environments'
       }
     }
 
